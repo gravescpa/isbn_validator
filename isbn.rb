@@ -1,21 +1,50 @@
-# def isbnlength(number)
-# 	valid10 = 0
-# 	valid13 = 0
-# 	if number.length == 10
-# 		valid10 = "true"
-# 	elsif number.length == 13
-# 	 	valid13 = "true"
-# 	end
-# end
+def isbnlength(number)
+	valid10 = 0
+	valid13 = 0
+	if number.length == 10
+		valid10 = "true"
+	elsif number.length == 13
+	 	valid13 = "true"
+	end
+end
 
-#def isbnvalidator(number)
-number = '12-345-5732'
-number = number.gsub(/[^0-9]/i, "") #This removes - and spaces from string
-n = number.to_s.chars.map(&:to_i)
-puts n
+#this strips out the dashes and spaces and pushes into an array
+#number = '12-345-5732'
 
-sum = (n[1]*1)+(n[2]*2)+(n[3]*3)+(n[4]*4)+(n[5]*5)+(n[6]*6)+(n[7]*7)+(n[8]*8)+(n[9]*9)
-checksum = sum%11
-checkdigit = number + checksum
-puts checkdigit
-#end
+
+
+# n = number.to_s.chars.map(&:to_i) #this puts number into array n
+
+#function to check for valid ISBN check digit
+def isbnvalidator10(number)
+	number = number.gsub(/[^0-9]/i, "") #This removes - and spaces from string
+	
+	
+	#this portion pushes number into an array
+	array = number.to_s.chars.map(&:to_i)
+
+
+	#this portion performs the math for the ISBN check digit
+	sum = 0
+
+	array.each.with_index do |value, index|
+		break if index == 9
+		sum += value * (index +1)
+	end
+
+	checksum = sum % 11
+
+	if checksum == array[9]
+		true
+	else
+		false
+	end
+
+	checksum == array[9]
+
+end
+
+
+
+
+

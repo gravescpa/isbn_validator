@@ -14,7 +14,7 @@ class TestISBN < Minitest::Test
 	end
 
 	def test_valid_10_digit_check_digit_returns_valid
-		number = "817525766-0"
+		number = "0-13609181-4"
 		assert_equal(true, isbnvalidator10(number))
 	end
 
@@ -22,6 +22,11 @@ class TestISBN < Minitest::Test
 		number = "817525766-7"
 		assert_equal(false, isbnvalidator10(number))
 	end
-	
+
+	def test_valid_10_digit_check_digit_with_X_returns_valid
+		number = "0-76458572-X"
+		assert_equal(true, isbnvalidator10(number))
+	end
+
 
 end

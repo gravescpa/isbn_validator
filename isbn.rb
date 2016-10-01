@@ -15,13 +15,27 @@ end
 
 # n = number.to_s.chars.map(&:to_i) #this puts number into array n
 
-#function to check for valid ISBN check digit
+#function to check for valid ISBN 10 check digit
 def isbnvalidator10(number)
-	number = number.gsub(/[^0-9]/i, "") #This removes - and spaces from string
 	
+
 	
+	#This removes the dash and space from the string
+	number = number.gsub(/[^0-9A-X]/i, "")
+
+	array = number.split(//,)
+	
+	if array[9] = "X"
+		array[9] = "10"
+	end
+	
+
+
+
 	#this portion pushes number into an array
-	array = number.to_s.chars.map(&:to_i)
+	array = array.map(&:to_i)
+
+	
 
 
 	#this portion performs the math for the ISBN check digit
@@ -43,8 +57,4 @@ def isbnvalidator10(number)
 	checksum == array[9]
 
 end
-
-
-
-
 

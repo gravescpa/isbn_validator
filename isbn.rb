@@ -25,7 +25,7 @@ def isbnvalidator10(number)
 
 	array = number.split(//,)
 	
-	if array[9] = "X"
+	if array[9] == "X"
 		array[9] = "10"
 	end
 	

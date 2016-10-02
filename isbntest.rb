@@ -28,5 +28,14 @@ class TestISBN < Minitest::Test
 		assert_equal(true, isbnvalidator10(number))
 	end
 
+	def test_valid_13_digit_check_digit_returns_valid
+		number = "978-3-16-148410-0"
+		assert_equal(true, isbnvalidator13(number))
+	end
+
+	def test_valid_13_digit_check_digit_returns_invalid
+		number = "345-3-16-148410-0"
+		assert_equal(false, isbnvalidator13(number))
+	end
 
 end

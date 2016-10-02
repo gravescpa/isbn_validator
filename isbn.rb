@@ -8,53 +8,80 @@ def isbnlength(number)
 	end
 end
 
-#this strips out the dashes and spaces and pushes into an array
-#number = '12-345-5732'
-
-
-
-# n = number.to_s.chars.map(&:to_i) #this puts number into array n
 
 #function to check for valid ISBN 10 check digit
 def isbnvalidator10(number)
 	
 
-	
 	#This removes the dash and space from the string
 	number = number.gsub(/[^0-9A-X]/i, "")
 
-	array = number.split(//,)
+	array10 = number.split(//,)
 	
-	if array[9] == "X"
-		array[9] = "10"
+	if array10[9] == "X"
+		array10[9] = "10"
 	end
 	
-
-
 
 	#this portion pushes number into an array
-	array = array.map(&:to_i)
+	array10 = array10.map(&:to_i)
 
 	
-
-
 	#this portion performs the math for the ISBN check digit
-	sum = 0
+	sum10 = 0
 
-	array.each.with_index do |value, index|
+	array10.each.with_index do |value, index|
 		break if index == 9
-		sum += value * (index +1)
+		sum10 += value * (index +1)
 	end
 
-	checksum = sum % 11
+	checksum10 = sum10 % 11
 
-	if checksum == array[9]
+	if checksum10 == array10[9]
 		true
 	else
 		false
 	end
 
-	checksum == array[9]
+	checksum10 == array10[9]
+
+end
+
+#function to check for valid ISBN 13 check digit
+def isbnvalidator13(number)
+	
+	#This removes the dash and space from the string
+	number = number.gsub(/[^0-9A-X]/i, "")
+
+	array = number.split(//,)
+		
+	#this portion pushes number into an array
+	array = array.map(&:to_i)
+	
+	#this portion performs the math for the ISBN check digit
+	sum = 0
+
+
+	array.each.with_index do |value, index|
+		break if index == 12
+		
+		if index % 2 == 0
+			sum += value * 1
+		else
+			sum += value * 3
+		end
+	end
+
+	checksum = sum % 10
+	checksum1 = (10 - checksum)
+
+	if checksum1 == array[12]
+		true
+	else
+		false
+	end
+
+	checksum == array[12]
 
 end
 
